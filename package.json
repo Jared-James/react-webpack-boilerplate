@@ -1,0 +1,47 @@
+{
+  "name": "learning",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --mode development --hot",
+    "dev": "nodemon index.js",
+    "build": "webpack --mode production",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
+    "cors": "^2.8.5",
+    "css-loader": "^5.0.1",
+    "express": "^4.17.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "style-loader": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "@webpack-cli/serve": "^1.2.2",
+    "dotenv": "^8.2.0",
+    "html-webpack-plugin": "^5.0.0-alpha.9",
+    "knex": "^0.21.17",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1",
+    "uuid": "^3.4.0",
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
