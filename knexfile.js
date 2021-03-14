@@ -11,7 +11,11 @@ module.exports = {
     seeds: {
       directory: __dirname + '/data/seeds'
     },
-    useNullAsDefault: true
+    useNullAsDefault: true,
+    pool: {
+      min: 2,
+      max: 10
+    },
   },
 
   testing: {

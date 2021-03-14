@@ -39,10 +39,11 @@ app.post('/newmovie', async (req, res) => {
 
 app.post('/removeMovie', async (req, res) => {
 try {
-    const removeMovieButtonData = req.body.data.id
+    const removeMovieButtonData = req.body.payLoad.id
     const myarr = []
     myarr.push(removeMovieButtonData)
     const checkedRemove = await (await db('movie').delete().whereIn('id', myarr[0]))
+    res.status(201).json(checkedRemove)
 } catch (e) {
     res.status(500).json({ messge: 'Error del', error: err })
 }

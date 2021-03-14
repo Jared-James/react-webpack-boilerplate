@@ -10,7 +10,8 @@ module.exports = {
    },
    devServer: {
       historyApiFallback: true,
-      inline: true
+      inline: true,
+      hot: true
    },
    module: {
     rules: [

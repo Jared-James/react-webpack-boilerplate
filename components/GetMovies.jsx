@@ -1,15 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import ListMovies from './ListMovies';
+import { appContext } from './App'
 const axios = require('axios');
 
 const GetMovies = () => {
     const [showMovieList, setMovieList] = useState(false)
-    const [listMovies, getMovies] = useState([])
+    const [movies, getMovies] = useState([])
 
-    const getData = async () => {
+    let { title } = React.useContext(appContext)
+
+
+    // calls the function everytime the title changes from appContext
+    // This causes a rerender and makes sure our list stays upto date with 
+    // new database additions
+
+    useEffect(() => {
+        loadMovieDataFromApi()
+    }, [title])
+
+
+    // GET request to /users that returns the movie table from the database 
+    // We set the setMovieList to true so that we re-render the component to display the updated list
+
+    const loadMovieDataFromApi = async () => {
         try {
             let { data } = await axios.get('http://localhost:3000/users')
-            console.log('data', data)
             getMovies(data.getMovieList)
             setMovieList(true)
         } catch (e) {
@@ -17,15 +32,18 @@ const GetMovies = () => {
         }
     }
 
+    // Sets showMovieList to false which hides the data from view
     const HideMovieList = () => {
         setMovieList(false)
     }
 
+    // returns two buttons which deal with showing and hiding the movie list
+    // return a ListMovies component which has the indiviual movies listed.
     return (
         <>
-            <button onClick={getData}>Load Movies!</button>
+            <button onClick={loadMovieDataFromApi}>Show Movies</button>
             <button onClick={HideMovieList}>Hide Movies</button>
-            <ListMovies listMovies={listMovies} hideMovies={showMovieList} />
+            <ListMovies loadMovieDataFromApi={loadMovieDataFromApi} movies={movies} showMovieList={showMovieList} />
         </>
     )
 }

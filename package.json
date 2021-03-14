@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --mode development --hot",
     "dev": "nodemon index.js",
-    "build": "webpack --mode production",
+    "build": "concurrently --kill-others \"npm run start\" \"npm run dev\"",
+    "build:prod": "webpack --mode production",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run"
@@ -32,6 +33,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "@webpack-cli/serve": "^1.2.2",
+    "concurrently": "^6.0.0",
     "dotenv": "^8.2.0",
     "html-webpack-plugin": "^5.0.0-alpha.9",
     "knex": "^0.21.17",

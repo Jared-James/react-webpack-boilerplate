@@ -1,26 +1,28 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect, createContext} from 'react'
+import {appContext} from './App'
+import { v4 as uuidv4 } from 'uuid'
 
 const AddMovies = () => {
-    const [title, setTitle] = useState([])
-    const [rating, setRating] = useState()
-    const [duplicateMovieError, setDuplicateMovieError] = useState(false)
-    
-    const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      };
+    let [title, setTitle] = useState([])
+    let [rating, setRating] = useState()
+    let [duplicateMovieError, setDuplicateMovieError] = useState(false)
+   
+    let result = React.useContext(appContext)
+
+
     const handleSubmit = async (e) => {
+        
         try {
             e.preventDefault()
             const data = {
+                id: uuidv4(),
                 movieName: title,
                 rating: rating
             }
         let movieData =  await axios.post('http://localhost:3000/newmovie', {data})
         setDuplicateMovieError(false)
+        result.setTitle(title)
         return movieData
 
         
@@ -46,7 +48,7 @@ const AddMovies = () => {
                 <label>Title</label>
                 <input id="moviename" name="moviename" type="text" onChange={handleChangleMovieName} />
                 <label>Rating</label>
-                <input id="rating" name="rating" text="number" onChange={handleChangleRating} />
+                <input id="rating" name="rating" type="number" onChange={handleChangleRating} />
                 <button>Add Movie</button>
             </form>
         </>

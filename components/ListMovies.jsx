@@ -1,50 +1,67 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+
+
 
 const ListMovies = (props) => {
+    const [checkBoxInArray, addCheckBoxToArray] = useState([])
+    const [reload, reloadPage] = useState(false)
 
-    const [CheckBox, setBoxState] = useState()
-    const [allCheckedBoxses, removeAllCheckedBoxses] = useState([])
 
+    let { movies, showMovieList, loadMovieDataFromApi } = props
 
-    let { listMovies, hideMovies } = props
-
+    // on reload this will check that checkboxes are in the array
     useEffect(() => {
-        console.log('checkedboxes', allCheckedBoxses)
-    }, [allCheckedBoxses])
+        loadMovieDataFromApi()
+        console.log(checkBoxInArray)
+    }, [reload])
 
 
+    // Checks if the checkbox checked prop is === true then adds the id to an array
+    // if the checkbox prop is !=== then it will find the indexOf the id and remove it from the array 
     const handleOnChange = (e) => {
-        setBoxState(!!CheckBox)
-        removeAllCheckedBoxses([e.target.value, ...allCheckedBoxses])
-
+        if (e.target.checked === true) {
+            addCheckBoxToArray([e.target.value, ...checkBoxInArray])
+        } else {
+            const index = checkBoxInArray.indexOf(e.target.value)
+            if (index > -1) {
+                checkBoxInArray.splice(index, 1)
+            }
+        }
     }
 
 
-
+    // Sends a post request to /removeMovie along with the ID 
+    // if  status is 201 then reload the page using custom hook
+    // reset the checkBoxInArray back to an empty array to remove previous value
     const handleRemoveMovies = async (e) => {
         e.preventDefault()
-         try {
-            const data = {
-                id: allCheckedBoxses
+        try {
+            const payLoad = {
+                id: checkBoxInArray
             }
-            let removeMovie = await axios.post('http://localhost:3000/removeMovie', {data})
-            return removeMovie
-         } catch (e) {
+            let data = await axios.post('http://localhost:3000/removeMovie', { payLoad })
+            if (data.status === 201) {
+                reloadPage(!reload)
+                addCheckBoxToArray([])
+            } else {
+                return
+            }
+        } catch (e) {
             console.log('error in sending', e)
-         }
+        }
     }
 
     return (
         <>
             <button onClick={handleRemoveMovies}>Remove movies</button>
             <h2>Movie Collection</h2>
-            {hideMovies ? listMovies.map(moviename => {
+            {showMovieList ? movies.map(moviename => {
                 const movie = moviename.movieName
-                return <ul id={moviename.id}>
+                return <ul key={moviename.id} id={moviename.id}>
                     <ol>
-                        <div onChange={handleOnChange}>
-                            <p><input type="checkbox" value={moviename.id} />   {moviename.id} Title: {movie}</p>
+                        <div >
+                            <input onChange={handleOnChange} type="checkbox" name={movie} value={moviename.id} /><label>Title: {movie}</label>
                         </div>
                     </ol>
                 </ul>
