@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-const db = require('./data/db')
+const db = require('../data/db')
+
 
 app.get("/users", async (req, res) => {
     console.log('hello from users')

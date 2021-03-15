@@ -41,9 +41,15 @@ const GetMovies = () => {
     // return a ListMovies component which has the indiviual movies listed.
     return (
         <>
-            <button onClick={loadMovieDataFromApi}>Show Movies</button>
-            <button onClick={HideMovieList}>Hide Movies</button>
-            <ListMovies loadMovieDataFromApi={loadMovieDataFromApi} movies={movies} showMovieList={showMovieList} />
+            <div>
+                <div id="show-hide-buttons">
+                    {/* <button onClick={loadMovieDataFromApi}>Show Movies</button>
+                    <button onClick={HideMovieList}>Hide Movies</button> */}
+                </div>
+                <div id="list-movies">
+                    <ListMovies loadMovieDataFromApi={loadMovieDataFromApi} movies={movies} showMovieList={showMovieList} />
+                </div>
+            </div>
         </>
     )
 }

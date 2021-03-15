@@ -9,6 +9,7 @@ const ListMovies = (props) => {
 
 
     let { movies, showMovieList, loadMovieDataFromApi } = props
+    console.log('props', movies)
 
     // on reload this will check that checkboxes are in the array
     useEffect(() => {
@@ -54,18 +55,33 @@ const ListMovies = (props) => {
 
     return (
         <>
-            <button onClick={handleRemoveMovies}>Remove movies</button>
-            <h2>Movie Collection</h2>
-            {showMovieList ? movies.map(moviename => {
-                const movie = moviename.movieName
-                return <ul key={moviename.id} id={moviename.id}>
-                    <ol>
-                        <div >
-                            <input onChange={handleOnChange} type="checkbox" name={movie} value={moviename.id} /><label>Title: {movie}</label>
-                        </div>
-                    </ol>
-                </ul>
-            }) : <p></p>}
+            <div id="movie-title-remove-button">
+                <h2 id="movie-title">Movie Collection</h2>
+                <button id="remove-button" onClick={handleRemoveMovies}>Remove movies</button>
+            </div>
+            <div id="list-movie-container">
+                {showMovieList ? movies.map(moviename => {
+                    // const movie = moviename.movieName
+                    const { rating, movieName } = moviename
+
+                    return <ul key={moviename.id} id={moviename.id}>
+                        <ol>
+                            <div id="movies">
+                                <div id="movie-checkbox">
+                                    <input onChange={handleOnChange} type="checkbox" name={movieName} value={moviename.id} />
+                                </div>
+                                <div id="movie-title">
+                                    <label>{movieName}</label>
+                                </div>
+                                <div id="movie-rating">
+                                    <label>rating: {rating}</label>
+                                </div>
+                            </div>
+                        </ol>
+                    </ul>
+
+                }) : <p></p>}
+            </div>
         </>
     )
 }

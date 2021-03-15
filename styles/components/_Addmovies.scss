@@ -1,0 +1,30 @@
+#add-movies {
+    // outline: 1px solid red;
+}
+
+#add-movie-button >button {
+    // background-color: grey;
+    color: white;
+    border: 0;
+    padding: .5em;
+    justify-content: center;
+    width: 100%;
+    background-color: lightgray;
+}
+
+#row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+}
+
+#row > label {
+    flex: 1;
+    padding: .5em 1em .5em 0
+}
+
+#row > input {
+    outline: 2px solid lightgray;
+    flex: 2;
+    padding: .5em;
+}

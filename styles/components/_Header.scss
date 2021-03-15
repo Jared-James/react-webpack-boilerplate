@@ -1,0 +1,16 @@
+#header {
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+;
+}
+
+#header > div {
+    align-content: center;
+}
+
+#header > div >h2 {
+    color: lightskyblue;
+}

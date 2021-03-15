@@ -1,0 +1,16 @@
+#grid-container {
+    outline: 1px solid blue;
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.5fr;
+    grid-template-rows: 0.1fr 0.1fr 1fr;
+    gap: 1px 1px;
+    grid-template-areas:
+      ". header ."
+      ". add-movies ."
+      ". get-movies .";
+      height: 100vh;
+  }
+  
+  #header { grid-area: header };
+  #add-movies { grid-area: add-movies };
+  #get-movies { grid-area: get-movies };
