@@ -9,7 +9,8 @@ const ListMovies = (props) => {
 
 
     let { movies, showMovieList, loadMovieDataFromApi } = props
-    console.log('props', movies)
+
+
 
     // on reload this will check that checkboxes are in the array
     useEffect(() => {
@@ -23,6 +24,7 @@ const ListMovies = (props) => {
     const handleOnChange = (e) => {
         if (e.target.checked === true) {
             addCheckBoxToArray([e.target.value, ...checkBoxInArray])
+
         } else {
             const index = checkBoxInArray.indexOf(e.target.value)
             if (index > -1) {
@@ -53,12 +55,12 @@ const ListMovies = (props) => {
         }
     }
 
+    console.log(checkBoxInArray)
+
+
     return (
         <>
-            <div id="movie-title-remove-button">
-                <h2 id="movie-title">Movie Collection</h2>
-                <button id="remove-button" onClick={handleRemoveMovies}>Remove movies</button>
-            </div>
+           
             <div id="list-movie-container">
                 {showMovieList ? movies.map(moviename => {
                     // const movie = moviename.movieName
@@ -68,22 +70,36 @@ const ListMovies = (props) => {
                         <ol>
                             <div id="movies">
                                 <div id="movie-checkbox">
-                                    <input onChange={handleOnChange} type="checkbox" name={movieName} value={moviename.id} />
-                                </div>
-                                <div id="movie-title">
-                                    <label>{movieName}</label>
+                                    <label>
+                                        <input id="no-line" onChange={handleOnChange}   type="checkbox" name={movieName} value={moviename.id} />
+                                        <label id="movie-title">{movieName}</label>
+                                    </label>
+
                                 </div>
                                 <div id="movie-rating">
-                                    <label>rating: {rating}</label>
-                                </div>
+                                        <label>Genre: {rating}</label>
+                                    </div>
                             </div>
                         </ol>
                     </ul>
 
                 }) : <p></p>}
             </div>
+            <div id="movie-title-remove-button">
+                <button id="remove-button" onClick={handleRemoveMovies}>Remove movies</button>
+            </div>
         </>
     )
 }
 
 export default ListMovies
+
+{/* <div id="movies">
+<div id="movie-checkbox">
+    <input id="no-line" onChange={handleOnChange} type="checkbox" name={movieName} value={moviename.id} />
+</div>
+<div id="movie-title">
+    <label for="no-line">{movieName}</label>
+</div>
+
+</div> */}

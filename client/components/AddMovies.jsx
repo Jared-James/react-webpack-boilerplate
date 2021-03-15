@@ -23,7 +23,9 @@ const AddMovies = () => {
             let movieData = await axios.post('http://localhost:3000/newmovie', { data })
             setDuplicateMovieError(false)
             result.setTitle(title)
-            return movieData
+            setTitle([])
+            setRating([])
+            // return movieData
 
 
         } catch (e) {
@@ -49,11 +51,11 @@ const AddMovies = () => {
                 <div id="add-movie-form">
                     <div id="row">
                         <label>Title:</label>
-                        <input id="moviename" name="moviename" type="text" onChange={handleChangleMovieName} />
+                        <input id="moviename" name="moviename" type="text" placeholder="Add a movie..." onChange={handleChangleMovieName} value={title} />
                     </div>
                     <div id="row">
-                        <label>Rating:</label>
-                        <input id="rating" name="rating" type="number" onChange={handleChangleRating} />
+                        <label>Genre:</label>
+                        <input id="rating" name="genre" type="number"  onChange={handleChangleRating} value={rating}/>
                     </div>
                     <div id="add-movie-button">
                         <button>Add Movie</button>
