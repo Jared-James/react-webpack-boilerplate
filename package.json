@@ -7,10 +7,7 @@
     "start": "webpack serve --mode development --hot",
     "dev": "nodemon server/index.js",
     "build": "concurrently --kill-others \"npm run start\" \"npm run dev\"",
-    "build:prod": "webpack --mode production",
-    "migrate": "knex migrate:latest",
-    "rollback": "knex migrate:rollback",
-    "seed": "knex seed:run"
+    "build:prod": "webpack --mode production"
   },
   "keywords": [],
   "author": "",

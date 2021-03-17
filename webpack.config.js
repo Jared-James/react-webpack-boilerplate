@@ -2,7 +2,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
 module.exports = {
    context: __dirname,
-   entry: './client/components/Main',
+   entry: './client/Main',
    output: {
       path: path.resolve(__dirname, 'client', 'public', 'dist'),
       filename: 'main.js',
