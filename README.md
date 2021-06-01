@@ -1,4 +1,4 @@
-# react-node-webpack-boilerplate
+# react-webpack-boilerplate v 1.1
 
 For jumping into new projects that need React | webpack | SASS
 
@@ -8,7 +8,7 @@ For jumping into new projects that need React | webpack | SASS
 - Webpack
 - Sass
 - React
-- Express
+
 
 ## Installation
 
@@ -21,9 +21,8 @@ Npm run install
 
 ```bash
 NPM start - runs webpack in development with hot reload
-NPM dev - runs nodemon on server/index.js
 
-
-Server code runs on localhost:3000
+Client code runs on localhost:8080
 
 ```
+Updated on 1/06/2021
